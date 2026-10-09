@@ -21,6 +21,7 @@ void median_reference(const uint8_t* input, uint8_t* output,
                       const ImageParams* params, int radius);
 void median_histogram(const uint8_t* input, uint8_t* output,
                       const ImageParams* params, int radius);
+int reflect101(int coordinate, int length);
 
 #ifdef __cplusplus
 }
