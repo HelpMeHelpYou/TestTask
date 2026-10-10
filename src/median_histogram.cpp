@@ -46,7 +46,7 @@ void median_histogram(const std::uint8_t* input, std::uint8_t* output,
             if (x + 1 == params->width) break;
 
             // Slide the window one pixel right: remove a column and add a column.
-            const int leaving = reflect101(x - radius + 1, params->width);
+            const int leaving = reflect101(x - radius, params->width);
             const int entering = reflect101(x + radius + 1, params->width);
             for (int dy = -radius; dy <= radius; ++dy) {
                 const int row = reflect101(y + dy, params->height);
