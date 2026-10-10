@@ -4,14 +4,15 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace {
 int reflect101(int coordinate, int length) {
     if (length == 1) return 0;
     if (coordinate < 0) coordinate = -coordinate;
     if (coordinate >= length) coordinate = 2 * (length - 1) - coordinate;
-    return coordinate < 0 ? 0 : coordinate;
+    return coordinate < 0 ? reflect101(coordinate,length) : coordinate;
 }
 
+
+namespace {
 std::uint8_t select_median(const std::array<int, 256>& histogram, int samples) {
     int count = 0;
     for (int value = 0; value < 256; ++value) {
@@ -46,7 +47,7 @@ void median_histogram(const std::uint8_t* input, std::uint8_t* output,
             if (x + 1 == params->width) break;
 
             // Slide the window one pixel right: remove a column and add a column.
-            const int leaving = reflect101(x - radius + 1, params->width);
+            const int leaving = reflect101(x - radius, params->width);
             const int entering = reflect101(x + radius + 1, params->width);
             for (int dy = -radius; dy <= radius; ++dy) {
                 const int row = reflect101(y + dy, params->height);
