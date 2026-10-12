@@ -33,11 +33,11 @@ int main(int argc, char** argv) {
     std::vector<std::uint8_t> actual(input.pixels.size());
     std::vector<std::uint8_t> expected(input.pixels.size());
     const ImageParams params{input.width, input.height, input.width, input.width};
-    MedianDevice device;
+    Device device;
 
     std::cout << "Input: " << input_path << " (" << input.width << 'x' << input.height
               << ", 8-bit monochrome), radius=" << radius << '\n';
-    if (run_filter(device, input.pixels.data(), actual.data(), params, radius) != Status::Done) {
+    if (run_median_filter(device, input.pixels.data(), actual.data(), params, radius) != Status::Done) {
         std::cerr << "The model rejected the job\n";
         return 2;
     }
