@@ -22,8 +22,8 @@ From the project directory:
 ```
 
 - `median_demo [input.y4m] [radius] [output-prefix]`: compares device and reference pixels; the optional prefix saves `result_device.y4m` and `result_reference.y4m` in this example. Defaults: supplied image, radius 1, no files. The starter intentionally reports mismatches and exits with code 1 (exercise 1).
-- `sobel_reference_demo [input.y4m] [gain] [output.y4m]`: runs the floating-point reference and saves a rounded 8-bit preview. Defaults: supplied image, gain 1, `sobel_reference.y4m`.
-- `median_tests`: runs all registered tests without arguments; exits with 0 on success or 1 on failure. The starter only checks device creation/destruction. Add tests in `tests/median_tests.cpp`.
+- `sobel_reference_demo [input.y4m] [gain] [output.y4m]`: runs the floating-point reference, model algorithm and saves a rounded 8-bit preview. Defaults: supplied image, gain 1, `sobel_reference.y4m`.
+- `median_tests`: runs all registered tests without arguments; exits with 0 on success or 1 on failure. Add tests in `tests/median_tests.cpp`.
 
 View Y4M files with [ffplay](https://ffmpeg.org/ffplay.html), FFmpeg's lightweight media player. Press `q` to quit:
 
@@ -46,11 +46,14 @@ Both return `bool` and report failures through `error`. The supplied input is 51
 | --- | --- |
 | `CMakeLists.txt` | Libraries, demo executables, compiler settings, and input-data copying. |
 | `include/register_map.h` | Common register offsets, command/status values, and register-bank size. |
-| `include/median_filter.h` | Shared image descriptor, image limits, and median algorithm interfaces. |
+| `include/base_filter.h` | Shared image descriptor, image limits. |
+| `include/median_filter.h` | Median algorithm interfaces. |
+| `include/sobel_filter.h` | Sobel filter algorithm interface. |
 | `include/median_device.h`, `src/median_device.cpp` | Model device, worker thread, register access, validation, and status. |
 | `include/host.h`, `src/host.cpp` | Host-side device interface. |
 | `include/event.h` | Synchronization primitive used by the host and model. |
 | `src/median_histogram.cpp` | Histogram-based median model algorithm. |
+| `src/sobel_filter.cpp` | Sobel filter model algorithm. |
 | `src/median_reference.c` | Independent C median reference using a padded image and sorting. |
 | `include/sobel_reference.h`, `src/sobel_reference.c` | Floating-point edge-magnitude reference with packed double output. |
 | `src/reference_image.h` | Shared image expansion with reflect-101 padding for the reference filters. |

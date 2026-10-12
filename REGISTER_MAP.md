@@ -22,6 +22,9 @@ Access is from the host's perspective. Configuration registers retain their valu
 | `0x18` | `Radius` | Read/write | 0 | Median radius, integer 0 through 8 inclusive. Window size is `(2 * Radius + 1)^2`. |
 | `0x20` | `Command` | Write | 0 | Writing 1 requests a job and signals the model thread. Other values produce an invalid-argument completion. |
 | `0x28` | `Status` | Read | 0 | Model result: 0 = Idle (initial state), 1 = Done, 2 = InvalidArgument. Read only after the completion interrupt. |
+| `0x30` | `FilterSelect` | Read/write | 0 | 0 = median, 1 = Sobel. Other values are invalid. |
+| `0x38` | `EdgeGain` | Read/write | 0 | Represents real-valued gain in [0.0, 1.0] using an unsigned integer code. Byte presentation is real value myltiplyed by 1 << 10 (Q22.10) |
+
 
 Access permissions describe the protocol; the small accessor methods do not enforce read-only or write-only permissions.
 

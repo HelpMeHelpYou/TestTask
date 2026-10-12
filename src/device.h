@@ -8,12 +8,12 @@
 #include <cstdint>
 #include <thread>
 
-class MedianDevice {
+class Device {
 public:
-    MedianDevice();
-    ~MedianDevice();
-    MedianDevice(const MedianDevice&) = delete;
-    MedianDevice& operator=(const MedianDevice&) = delete;
+    Device();
+    ~Device();
+    Device(const Device&) = delete;
+    Device& operator=(const Device&) = delete;
 
     // One host, one outstanding job. Configure only while idle/after waiting.
     void write_register(Register reg, std::uintptr_t value);
