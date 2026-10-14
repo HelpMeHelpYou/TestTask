@@ -85,7 +85,7 @@ namespace {
             for (int x = -maximum; x < maximum + 1; x=x+8)
                 for (int y = -maximum; y < maximum + 1; y=y+8)
                 {
-                    auto actual = evalute_sobel_value(x, y, gain * ONE);
+                    auto actual = evalute_sobel_value(x, y, static_cast<uint32_t>(gain * ONE));
                     actual = actual > 255 ? 255 : actual;
                     auto value = (gain * sqrt((double)x * x + (double)y * y) / 4.0) + 0.5;
                     auto reference = static_cast<uint8_t>(value > 255.0 ? 255.0 : value);

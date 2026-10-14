@@ -2,7 +2,6 @@
 #include "reference_image.h"
 
 #include <math.h>
-#include <bit>
 
 uint32_t fixed_sqrt(uint32_t n) {
     if (n == 0) return 0;
@@ -80,23 +79,7 @@ void sobel_filter(const uint8_t* input, uint8_t* output,
             }
             value = evalute_sobel_value(gx, gy, edgeGain);
 
-            int value2;
-            value2 = (fixed_sqrt((gx * gx + gy * gy) * ONE) / 4 + ONE / 2) / ONE;
-            double value1;
-            value1 =   sqrt((double)gx * gx + (double)gy * gy) / 4.0;
-            double value3 = sqrt((double)gx * gx + (double)gy * gy) / 4.0 * 0.7;
-
-            if (value2 != static_cast<int32_t>(value1+0.5))
-            {
-                printf("");
-            }
-            if (value != static_cast<int32_t>(value3 + 0.5))
-            {
-                printf("");
-            }
-        
-
-            output[(size_t)y * params->width + x] = value > 255 ? 255 : value;
+            output[(size_t)y * params->width + x] = value > 255 ? 255 : static_cast<uint8_t>(value);
         }
     }
 
